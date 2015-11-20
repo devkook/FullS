@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.diginori.fulls.db.History;
 import com.diginori.fulls.util.SystemUiHider;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.realm.Realm;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -29,6 +32,7 @@ public class FullscreenActivity extends Activity {
     ListView listView;
     Button btn;
     ArrayAdapter<String> m_Adapter;
+    Realm realm;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -73,13 +77,22 @@ public class FullscreenActivity extends Activity {
         m_Adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
         listView.setAdapter(m_Adapter);
 
+        realm = Realm.getInstance(this);
+
         btn = (Button)findViewById(R.id.dummy_button);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 long time = System.currentTimeMillis();
                 SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+
                 String now = dayTime.format(new Date(time));
+
+                realm.beginTransaction();
+                History h = realm.createObject(History.class); // Create a new object
+                h.setDate(now);
+                h.setLog(editText.getText().toString());
+                realm.commitTransaction();
 
                 m_Adapter.add(now);
             }
