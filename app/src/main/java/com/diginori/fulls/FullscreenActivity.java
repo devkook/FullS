@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.diginori.fulls.db.History;
 import com.diginori.fulls.util.SystemUiHider;
 
+import com.mopub.common.MoPub;
+import io.fabric.sdk.android.Fabric;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -68,6 +70,7 @@ public class FullscreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new MoPub());
 
         setContentView(R.layout.activity_fullscreen);
 
@@ -102,7 +105,7 @@ public class FullscreenActivity extends Activity {
                 RealmQuery<History> query = realm.where(History.class);
                 RealmResults<History> result = query.findAll();
 
-                Toast toast = Toast.makeText(getApplicationContext(),"result:" + result.size(),Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "result:" + result.size(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -210,5 +213,18 @@ public class FullscreenActivity extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        RealmQuery<History> query = realm.where(History.class);
+        RealmResults<History> result = query.findAll();
+
+//        adapter = new ZipListAdapter(this, results);
+//        threadsListView.setAdapter(adapter);
+//
+//        adapter.notifyDataSetChanged();
     }
 }
