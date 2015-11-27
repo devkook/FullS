@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 import com.diginori.fulls.db.History;
 import com.diginori.fulls.util.SystemUiHider;
-
 import com.mopub.common.MoPub;
-import io.fabric.sdk.android.Fabric;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -222,9 +222,8 @@ public class FullscreenActivity extends Activity {
         RealmQuery<History> query = realm.where(History.class);
         RealmResults<History> result = query.findAll();
 
-//        adapter = new ZipListAdapter(this, results);
-//        threadsListView.setAdapter(adapter);
-//
-//        adapter.notifyDataSetChanged();
+        for (int i = 0; i < result.size(); i++) {
+            m_Adapter.add(result.get(i).getDate().toString());
+        }
     }
 }
