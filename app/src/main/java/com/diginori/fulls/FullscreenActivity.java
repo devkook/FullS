@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.diginori.fulls.db.History;
 import com.diginori.fulls.util.SystemUiHider;
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -95,6 +98,12 @@ public class FullscreenActivity extends Activity {
                 realm.commitTransaction();
 
                 m_Adapter.add(now);
+
+                RealmQuery<History> query = realm.where(History.class);
+                RealmResults<History> result = query.findAll();
+
+                Toast toast = Toast.makeText(getApplicationContext(),"result:" + result.size(),Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
