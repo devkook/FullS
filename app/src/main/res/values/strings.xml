@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FullS</string>
 
-    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_button">입력</string>
+    <string name="dummy_button_goList">고고</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

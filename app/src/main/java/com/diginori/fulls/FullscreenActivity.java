@@ -3,6 +3,7 @@ package com.diginori.fulls;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class FullscreenActivity extends Activity {
     EditText editText;
     Button btn;
     Realm realm;
+
+    Button btn_goListView;
 
     private ListView mListView = null;
     private ListViewAdapter mAdapter = null;
@@ -102,6 +105,15 @@ public class FullscreenActivity extends Activity {
         });
 
         realm = Realm.getInstance(this);
+
+        btn_goListView = (Button)findViewById(R.id.btn_goList);
+        btn_goListView.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FullscreenActivity.this, ListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btn = (Button)findViewById(R.id.dummy_button);
         btn.setOnClickListener(new Button.OnClickListener() {
