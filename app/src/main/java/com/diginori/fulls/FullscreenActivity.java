@@ -120,7 +120,7 @@ public class FullscreenActivity extends Activity {
             @Override
             public void onClick(View view) {
                 long time = System.currentTimeMillis();
-                SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
                 String date = dayTime.format(new Date(time));
                 String content = editText.getText().toString();
