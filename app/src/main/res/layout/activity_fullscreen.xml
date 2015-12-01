@@ -22,6 +22,12 @@
             android:background="@color/black_overlay" android:orientation="horizontal"
             tools:ignore="UselessParent">
 
+
+
+            <Button android:id="@+id/dummy_button2" style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="@string/dummy_button" />
+
             <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:text="@string/dummy_button" />
@@ -37,13 +43,13 @@
             android:autoText="false"
             android:hint="내용을" />
 
+
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="265dp"
+            android:layout_width="match_parent"
+            android:layout_height="241dp"
             android:id="@+id/listView"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="#ff000e" />
+            android:layout_weight="0"
+            android:layout_gravity="center" />
 
 
     </FrameLayout>

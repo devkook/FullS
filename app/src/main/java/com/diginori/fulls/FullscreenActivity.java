@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,9 +43,7 @@ import io.realm.RealmResults;
 public class FullscreenActivity extends Activity {
 
     EditText editText;
-    ListView listView;
     Button btn;
-    ArrayAdapter<String> m_Adapter;
     Realm realm;
 
     private ListView mListView = null;
@@ -113,15 +110,16 @@ public class FullscreenActivity extends Activity {
                 long time = System.currentTimeMillis();
                 SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
-                String now = dayTime.format(new Date(time));
+                String date = dayTime.format(new Date(time));
+                String content = editText.getText().toString();
 
                 realm.beginTransaction();
                 History h = realm.createObject(History.class); // Create a new object
-                h.setDate(now);
-                h.setLog(editText.getText().toString());
+                h.setDate(date);
+                h.setLog(content);
                 realm.commitTransaction();
 
-                m_Adapter.add(now);
+                addItem(content, date);
 
                 RealmQuery<History> query = realm.where(History.class);
                 RealmResults<History> result = query.findAll();
@@ -245,16 +243,20 @@ public class FullscreenActivity extends Activity {
 
         for (int i = 0; i < result.size(); i++) {
 
-            Drawable img = getResources().getDrawable(R.mipmap.ic_launcher);
             String content = result.get(i).getLog();
             String date = result.get(i).getDate();
-            mAdapter.addItem(
-                    img,
-                    content,
-                    date);
+
+            addItem(content, date);
         }
     }
 
+    private void addItem(String content, String date) {
+        Drawable img = getResources().getDrawable(R.mipmap.ic_launcher);
+        mAdapter.addItem(
+                img,
+                content,
+                date);
+    }
 
 
     private class ViewHolder {
