@@ -252,6 +252,7 @@ public class FullscreenActivity extends Activity {
 
         RealmQuery<History> query = realm.where(History.class);
         RealmResults<History> result = query.findAll();
+        this.setTitle("COUNT:" + result.size());
 
         for (int i = 0; i < result.size(); i++) {
 
@@ -260,6 +261,8 @@ public class FullscreenActivity extends Activity {
 
             addItem(content, date);
         }
+
+
     }
 
     private void addItem(String content, String date) {
