@@ -136,8 +136,9 @@ public class FullscreenActivity extends Activity {
                 RealmQuery<History> query = realm.where(History.class);
                 RealmResults<History> result = query.findAll();
 
-                Toast toast = Toast.makeText(getApplicationContext(), "result:" + result.size(), Toast.LENGTH_SHORT);
-                toast.show();
+                FullscreenActivity.this.setTitle("COUNT:" + result.size());
+//                Toast toast = Toast.makeText(getApplicationContext(), "result:" + result.size(), Toast.LENGTH_SHORT);
+//                toast.show();
             }
         });
 
